@@ -1,0 +1,94 @@
+<body>
+    <div class="bg">
+
+        <div style="padding-top: 50px;  " class="center "> 
+            <div class="InputData" style="background-color: white; width: 95%; border-radius: 20px; " >
+        <form novalidate #form="ngForm"  (submit)="onSubmit(form)">
+            <h1 style="color: blue;">Registration form</h1>
+          <input type="hidden" name="BookingId" [value]="service.formData.BookingId"/>
+           <div class="row">
+          <div class="col-md-6">
+            <label for="FirstName">First Name</label>
+            <input type="text" class="form-control" name="FirstName" #FirstName="ngModel" [(ngModel)]="service.formData.FirstName"  id="FirstName" placeholder="First Name" required [class.invalid]="FirstName.invalid  && FirstName.touched" >
+          </div>
+          <div class="col-md-6">
+            <label for="LastName">Last Name</label>
+            <input type="text" class="form-control" name="LastName" #LastName="ngModel" [(ngModel)]="service.formData.LastName" id="LastName"  placeholder="Last Name" required [class.invalid]="LastName.invalid  && LastName.touched">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="Email">Email</label>
+          <input type="email" class="form-control" name="Email" #Email="ngModel" [(ngModel)]="service.formData.Email" id="Email" placeholder="Email" required [class.invalid]="Email.invalid  && Email.touched">
+        </div>
+    
+        <div class="form-group">
+          <label for="Address">Address</label>
+          <input type="text" class="form-control" name="Address" #Address="ngModel" [(ngModel)]="service.formData.StreetAddress" id="Address" placeholder="1234 Main St" required [class.invalid]="Address.invalid  && Address.touched">
+        </div>
+
+     
+        
+        <div class="row">
+          <div class=" col-md-6">
+            <label for="City">City</label>
+            <input type="text" class="form-control" name="City" #City="ngModel" [(ngModel)]="service.formData.City" id="City" required [class.invalid]="City.invalid  && City.touched">
+          </div>
+          <div class=" col-md-4">
+            <label for="Provience">Provience</label>
+            <input type="text" class="form-control" name="Provience" #Provience="ngModel" [(ngModel)]="service.formData.Provience" id="Provience" required [class.invalid]="Provience.invalid  && Provience.touched">
+            
+          </div>
+          <div class=" col-md-2">
+            <label for="ZipCode">Zip</label>
+            <input type="text" class="form-control"  name="ZipCode" #ZipCode="ngModel" [(ngModel)]="service.formData.ZipCode" id="Zip" required [class.invalid]="ZipCode.invalid  && ZipCode.touched">
+          </div>
+        </div>
+         
+        <div class="row">
+          <div class="col-md-6">
+            <label for="Mobilenumber">Mobile number </label>
+            <input type="text" class="form-control" name="Mobilenumber" #Mobilenumber="ngModel" [(ngModel)]="service.formData.Phone_Number"  id="Mobilenumber" placeholder="Mobile number" required [class.invalid]="Mobilenumber.invalid  && Mobilenumber.touched">
+          </div>
+
+        
+          <div class="col-md-6">
+            <label for="Imageupload">Image upload </label>
+            <input type="text" class="form-control"  name="Imageupload" #Imageupload="ngModel" [(ngModel)]="service.formData.PhotoFileName" id="Imageupload" required [class.invalid]="Imageupload.invalid  && Imageupload.touched"  >
+          </div>
+        </div>
+      
+        <h3 style="margin-top:  10px; color:blueviolet;">Booking Information</h3>
+        
+        <div class="row">
+          <div class=" col-md-6">
+            <label for="RoomType">Room type</label>
+            <input type="text" class="form-control" name="RoomType" #Roomtype="ngModel" [(ngModel)]="service.formData.RoomType"  id="RoomType"  required >
+          </div>
+          <div class=" col-md-4">
+            <label for="SmokingRoom">Smoking Room</label>
+            <input type="text" class="form-control" name="SmokingRoom" #SmokingRoom="ngModel" [(ngModel)]="service.formData.SmokingRoom"  id="SmokingRoom" >
+          </div>
+        
+          <div class=" col-md-2">
+            <label for="LeasePocketWIFI">Lease Pocket WIFI</label>
+            <select id="inputState" class="form-control" name="LeasePocketWIFI" #LeasePocketWIFI="ngModel" [(ngModel)]="service.formData.LeasePocketWIFI"  id="LeasePocketWIFI" >
+              <option selected>Yes</option>
+              <option>No</option>
+            </select >
+          </div>
+        </div>
+
+        <div style="margin-top: 10px;">
+          <button type="submit" class="btn btn-primary" [disabled]="form.invalid"  *ngIf="id1==0" 
+          >create</button>
+
+          <button type="submit" class="btn btn-primary" [disabled]="form.invalid"  *ngIf="id1!=0"
+         >update</button>
+       </div>
+       <!--  (click)="createClick(onSubmit)"-(click)="updateClick(onSubmit)"-->
+      </form>
+    </div>
+</div>
+    </div>
+</body>

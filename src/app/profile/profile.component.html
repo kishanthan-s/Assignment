@@ -1,0 +1,48 @@
+<body>
+    <div class="bg">
+        <a routerLink="/add/0" class=" btn btn-primary  mb-3" >Book Now</a> <!--(click)="addClick() (click)="editClick(book.bookingId)""-->
+        <table class="table table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th>BookingId</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>Provience</th>
+                    <th>Zip</th>
+                    <th>Mobitel number</th>
+                    <th>Room type</th>
+                    <th>Smoking room</th>
+                    <th>Pocket WIFI</th>
+                    <th></th>
+                    <th></th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let book of books">
+                    <!--<tr *ngIf ="books">-->
+                    <td>{{book.bookingId}}</td>
+                    <td>{{book.firstName}}</td>
+                    <td>{{book.lastName}}</td>
+                    <td>{{book.email}}</td>
+                    <td>{{book.streetAddress}}</td>
+                    <td>{{book.city}}</td>
+                    <td>{{book.provience}}</td>
+                    <td>{{book.zipCode}}</td>
+                    <td>{{book.phone_Number}}</td>
+                    <td>{{book.roomType}}</td>
+                    <td>{{book.smokingRoom}}</td>
+                    <td>{{book.LeasePocketWIFI}}</td>
+                    <td ><a [routerLink]="['/Edit',book.bookingId]" >Edit</a></td>
+                    <td> <button type="submit" class="btn btn-primary" (click)="deleteClick(book.bookingId)">X</button></td>
+                    
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
