@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { BookingDetail } from './booking-detail.model';
 
@@ -9,7 +9,9 @@ import { BookingDetail } from './booking-detail.model';
 })
 export class BookingDetailService {
 
-  
+  readonly baseurl='https://localhost:5001/api/booking'
+
+  books:any=[];
 
   constructor(private http: HttpClient) { }
 
@@ -22,13 +24,26 @@ export class BookingDetailService {
 
   putBooking(id1: number)
   {
-    return this.http.put(environment.baseUrl+'booking/'+id1,this.formData);
+    console.log(this.formData);
+   return this.http.put(environment.baseUrl+'booking/'+id1,this.formData);
+
+    //return this.http.put('${this.baseurl}/${this.formData.bookingId}', this.formData);
   }
 
-  ongetBooking(id1:number)
+  ongetBooking(id1:number): Observable<BookingDetail[]>
   {
-    return this.http.get<any>(environment.baseUrl+'booking/'+id1);
+    console.log("test");
+    return this.http.get<BookingDetail[]>(environment.baseUrl+'booking/'+id1);
+    
+    
   }
 
+  putBookings(booking: BookingDetail)
+  {
+    console.log(booking);
+   return this.http.put(environment.baseUrl+'booking/'+booking.BookingId,booking);
+
+    //return this.http.put('${this.baseurl}/${this.formData.bookingId}', this.formData);
+  }
   
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { BookingDetailService } from '../shared/booking-detail.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -9,9 +10,13 @@ import { BookingDetailService } from '../shared/booking-detail.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  
+  
 
   constructor(private http: HttpClient ) { }
-
+  Profile: any=[];
+  PhotoFileName="anonymous.png";
+  PhotoPath=environment.Photo_Url;
   books:any=[];
 
    
@@ -41,7 +46,25 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  imageUpload(event: any)
+  {
+    var file=event.target.files[0];
+    const formData: FormData=new FormData();
+    formData.append('file', file,file.name);
 
+    this.http.post(environment.Photo_Url, formData)
+    .subscribe((data:any)=>{
+      console.log(data);
+      
+  });
+  }
+
+  
+  onSubmit(event: any) {
+    
+    this.http.post(environment.Photo_Url, FormData)
+  }
+  
 
   
 

@@ -6,6 +6,7 @@ import { NgForm } from '@angular/forms';
 import { BookingDetail } from '../shared/booking-detail.model';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-booking',
@@ -15,7 +16,7 @@ import { ActivatedRoute } from '@angular/router';
 
 export class BookingComponent implements OnInit {
 
- 
+  books: any = [];
   booking: BookingDetail={
     BookingId: 0,
     FirstName: '',
@@ -32,8 +33,10 @@ export class BookingComponent implements OnInit {
     LeasePocketWIFI: ''
   };
   
+
+  test="hello";
   id1: number;
-  constructor(private http: HttpClient,public service: BookingDetailService, private toastr: ToastrService,private route: ActivatedRoute) { 
+  constructor(private http: HttpClient, public service: BookingDetailService, private toastr: ToastrService,private route: ActivatedRoute) { 
     
   }
   
@@ -44,21 +47,37 @@ export class BookingComponent implements OnInit {
     //const id = this.route.snapshot.paramMap.get('bookingId');
     this.id1 = +this.route.snapshot.params['bookingId'];
     
-    if(this.id1!=0)
+    if(this.id1===0)
     {
-      //console.log("edit");
-     //  
+     
+      //this.booking=this.service.ongetBooking(this.id1);
+      
     }
     else
     {
-      //console.log("add");
+      this.service.ongetBooking(this.id1).subscribe(
+        (res)=>{
+          // this.booking=res;
+          // this.service.formData=res;
+           console.log(res);
+           this.books =res;
+           //this.service.formData.FirstName = "iresh";
+           
+        });
+       
+
+        
+
+     }
+      
      
-    }
-    
+  }
+  
+ 
    
 
     
-  }
+  
 
   onSubmit(form: NgForm) {
     this.service.postBooking().subscribe(
@@ -99,7 +118,25 @@ export class BookingComponent implements OnInit {
   }
 
   updateClick(form: NgForm){
-    this.service.putBooking(this.id1).subscribe(
+
+    
+   let booking: BookingDetail={
+     BookingId:this.books.bookingId,
+    FirstName:form.value.FirstName,
+     LastName:form.value.LastName,
+    Email:form.value.Email,
+     StreetAddress:form.value.StreetAddress,
+     City:form.value.City,
+     Provience:form.value.Provience,
+     ZipCode:form.value.ZipCode,
+     Phone_Number:form.value.Mobilenumber,
+     PhotoFileName:form.value.PhotoFileName,
+     RoomType:form.value.RoomType,
+     SmokingRoom:form.value.SmokingRoom,
+     LeasePocketWIFI:form.value.LeasePocketWIFI
+
+   }
+    this.service.putBookings(booking).subscribe(
       (res) => {
         console.log("updated sucessfully");
         this.resetform(form);
@@ -113,6 +150,21 @@ export class BookingComponent implements OnInit {
 
   }
 
+   // let booking: BookingDetail={
+   //   BookingId:form.value.BookingId,
+  //    FirstName:form.value.FirstName,
+  //    LastName:form.value.LastName,
+  //    Email:form.value.Email,
+   //   StreetAddress:form.value.StreetAddress,
+   //   City:form.value.City,
+   //   Provience:form.value.Provience,
+   //   ZipCode:form.value.ZipCode,
+   //   Phone_Number:form.value.Phone_Number,
+   //   PhotoFileName:form.value.PhotoFileName,
+   //   RoomType:form.value.RoomType,
+   //   SmokingRoom:form.value.SmokingRoom,
+   //   LeasePocketWIFI:form.value.LeasePocketWIFI
 
+   // }
 
 }
