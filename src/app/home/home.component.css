@@ -1,0 +1,27 @@
+body,
+html {
+  height: 100%;
+}
+
+.bg {
+  /* The image used */
+  background-image: url(../../assets/banner5.jpg);
+  /* Full height */
+  height: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-bottom: 43px;
+  
+}
+
+.login{
+  width: 450px; 
+  background-color: white;
+    padding-left: 25px;
+     padding-top: 15px; 
+     padding-bottom: 15px; 
+     padding-right: 55px; 
+     border-radius: 20px;
+}

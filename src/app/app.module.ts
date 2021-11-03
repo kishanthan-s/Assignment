@@ -10,13 +10,25 @@ import { HttpClientModule }  from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { AuthGuard } from './guards/auth.guard';
+import { JwtModule } from '@auth0/angular-jwt';
+import { RouterModule } from '@angular/router';
+import { DatePipe } from '@angular/common';
+import { NavibarComponent } from './navibar/navibar.component';
+import { SignupComponent } from './signup/signup.component';
+
+export function tokenGetter() {
+  return localStorage.getItem("jwt");
+}
 
 @NgModule({
   declarations: [
     AppComponent,
     ProfileComponent,
     BookingComponent,
-    HomeComponent
+    HomeComponent,
+    NavibarComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -25,10 +37,17 @@ import { ToastrModule } from 'ngx-toastr';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains:["localhost:5000"],
+        disallowedRoutes: []
+      }
+    })
 
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

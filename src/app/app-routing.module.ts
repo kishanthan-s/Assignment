@@ -3,21 +3,24 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { BookingComponent } from './booking/booking.component';
+import { AuthGuard } from './guards/auth.guard';
+import { SignupComponent } from './signup/signup.component';
 
 
 const routes: Routes = [
 {path: 'home' , component: HomeComponent},
-{path: 'profile', component: ProfileComponent},
-{path: 'booking', component: BookingComponent },
+{path: 'signup' , component: SignupComponent},
+{path: 'profile', component: ProfileComponent,   canActivate:[AuthGuard]},
+//{path: 'booking', component: BookingComponent },
 
 {
   path:"add/:bookingId",
-  component: BookingComponent
+  component: BookingComponent,   canActivate:[AuthGuard]
 },
 
 {
   path:"Edit/:bookingId",
-  component: BookingComponent
+  component: BookingComponent,   canActivate:[AuthGuard]
 }
 
 ];

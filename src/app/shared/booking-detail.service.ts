@@ -45,5 +45,10 @@ export class BookingDetailService {
 
     //return this.http.put('${this.baseurl}/${this.formData.bookingId}', this.formData);
   }
+
+  postSignup(){
+    return this.http.post(environment.baseUrl+'customer/register',this.formData);
+    
+  }
   
 }

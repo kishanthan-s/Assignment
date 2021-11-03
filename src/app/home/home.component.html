@@ -1,1 +1,27 @@
-<p>home works!</p>
+
+<head></head>
+<body>
+ <div class="bg">
+       
+        <div style="padding-top: 400px; padding-left: 1000px; ">
+          
+        <div class="login" >
+            
+            <form class="form-signin" #loginform="ngForm" (ngSubmit)="login(loginform)" >
+              <div *ngIf ="Invalidlogin" class="alert alert-danger">Invalid username or password</div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input type="email" ngModel class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input type="password" ngModel class="form-control" id="password" name="password" placeholder="Password">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+        </div>
+        </div>
+    </div>
+</body>
