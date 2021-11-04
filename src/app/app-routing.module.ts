@@ -10,18 +10,18 @@ import { SignupComponent } from './signup/signup.component';
 const routes: Routes = [
 {path: 'home' , component: HomeComponent},
 {path: 'signup' , component: SignupComponent},
-{path: 'profile', component: ProfileComponent,   canActivate:[AuthGuard]},
+{path: 'profile', component: ProfileComponent },//,   canActivate:[AuthGuard]
 //{path: 'booking', component: BookingComponent },
 
 {
   path:"add/:bookingId",
-  component: BookingComponent,   canActivate:[AuthGuard]
-},
+  component: BookingComponent
+},//,   canActivate:[AuthGuard]
 
 {
   path:"Edit/:bookingId",
-  component: BookingComponent,   canActivate:[AuthGuard]
-}
+  component: BookingComponent
+}//,   canActivate:[AuthGuard]
 
 ];
 
