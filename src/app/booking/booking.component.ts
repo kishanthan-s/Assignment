@@ -7,6 +7,8 @@ import { BookingDetail } from '../shared/booking-detail.model';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 import { from } from 'rxjs';
+import { Variable } from '@angular/compiler/src/render3/r3_ast';
+
 
 @Component({
   selector: 'app-booking',
@@ -37,7 +39,7 @@ export class BookingComponent implements OnInit {
   test = "hello";
   id1: number;
   id2: any;
-
+  
   constructor(private http: HttpClient, public service: BookingDetailService, private toastr: ToastrService, private route: ActivatedRoute) {
 
   }
@@ -77,28 +79,32 @@ export class BookingComponent implements OnInit {
     console.log(str);
     this.getIdofcustomer(str);
 
-  }
-
-
-
-
-
-
-
-  onSubmit(form: NgForm) {
-    this.service.postBooking().subscribe(
-      (res) => {
-        console.log("Submitted sucessfully");
-        this.resetform(form);
-        this.toastr.success('Submitted sucessfully', 'Booking detail register')
-      },
-      (err) => {
-        console.log(err);
-      }
-
-    );
+    
 
   }
+
+
+
+
+
+
+
+  //onSubmit(form: NgForm) {
+ //   this.service.postBooking().subscribe(
+  //    (res) => {
+  //      console.log("Submitted sucessfully");
+  //      console.log(this.id2);
+   //     
+   //     this.resetform(form);
+    //    this.toastr.success('Submitted sucessfully', 'Booking detail register')
+   //   },
+   //   (err) => {
+   //     console.log(err);
+    //  }
+
+    //);
+
+  //}
 
 
 
@@ -109,10 +115,27 @@ export class BookingComponent implements OnInit {
   }
 
   createClick(form: NgForm) {
-    this.service.postBooking().subscribe(
+    const Credential={
+      'firstName': form.value.FirstName,
+      'lastName': form.value.LastName,
+      'email': form.value.Email,
+      'streetAddress': form.value.FirstName,
+      'city': form.value.City,
+      'provience': form.value.Provience,
+      'zipCode': form.value.ZipCode,
+      'phone_Number': form.value.FirstName,
+      'roomType': form.value.RoomType,
+      'smokingRoom': form.value.SmokingRoom,
+      'PhotoFileName': this.id2,
+      'leasePocketWIFI':form.value.LeasePocketWIFI
+    }
+    console.log(Credential)
+    this.service.postBooking( Credential).subscribe(
       (res) => {
         console.log("Submitted sucessfully");
         this.resetform(form);
+        console.log(this.id2);
+        console.log(res);
         this.toastr.success('Submitted sucessfully', 'Booking detail register')
       },
       (err) => {
@@ -124,8 +147,8 @@ export class BookingComponent implements OnInit {
   }
 
   updateClick(form: NgForm) {
-
-
+   
+    console.log(this.id2);
     let booking: BookingDetail = {
       BookingId: this.books.bookingId,
       FirstName: form.value.FirstName,
@@ -136,7 +159,7 @@ export class BookingComponent implements OnInit {
       Provience: form.value.Provience,
       ZipCode: form.value.ZipCode,
       Phone_Number: form.value.Mobilenumber,
-      PhotoFileName: form.value.PhotoFileName,
+      PhotoFileName: this.id2,
       RoomType: form.value.RoomType,
       SmokingRoom: form.value.SmokingRoom,
       LeasePocketWIFI: form.value.LeasePocketWIFI
@@ -174,7 +197,7 @@ export class BookingComponent implements OnInit {
   // }
 
 
-  getIdofcustomer(address:any)
+ public getIdofcustomer(address:any)
   {
    
    this.http.get<any>(environment.baseUrl+'Customer/'+address)
@@ -185,9 +208,11 @@ export class BookingComponent implements OnInit {
       console.log(jsonString);
       console.log(this.id2);
       
+      
     });
+   
   }
 
-  
+ 
   
 }

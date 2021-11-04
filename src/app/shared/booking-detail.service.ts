@@ -17,9 +17,9 @@ export class BookingDetailService {
 
   formData: BookingDetail=new BookingDetail();
 
-  postBooking()
+  postBooking( Credential: any)
   {
-    return this.http.post(environment.baseUrl+'booking',this.formData);
+    return this.http.post(environment.baseUrl+'booking',Credential);
   }
 
   putBooking(id1: number)
@@ -50,5 +50,7 @@ export class BookingDetailService {
     return this.http.post(environment.baseUrl+'customer/register',this.formData);
     
   }
+
+  
   
 }
