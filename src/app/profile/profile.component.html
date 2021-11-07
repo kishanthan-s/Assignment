@@ -1,12 +1,13 @@
 <body>
- 
-    <div class="bg">
-        <a routerLink="/add/0" class=" btn btn-primary  mb-3" >Book Now</a> <!--(click)="addClick() (click)="editClick(book.bookingId)""-->
-        
-       
-       
-  
-        
+
+    <div class="bg" >
+        <a routerLink="/add/0" class=" btn btn-primary  mb-3" style="margin-top: 25px;">Book Now</a>
+        <!--(click)="addClick() (click)="editClick(book.bookingId)""-->
+
+
+
+
+
         <table class="table table-striped">
             <thead class="thead-light">
                 <tr>
@@ -43,25 +44,59 @@
                     <td>{{book.roomType}}</td>
                     <td>{{book.smokingRoom}}</td>
                     <td>{{book.LeasePocketWIFI}}</td>
-                    <td ><a [routerLink]="['/Edit',book.bookingId]" >Edit</a></td>
-                    <td> <button type="submit" class="btn btn-primary" (click)="deleteClick(book.bookingId)">X</button></td>
-                    
+                    <td><a [routerLink]="['/Edit',book.bookingId]">Edit</a></td>
+                    <td> <button type="submit" class="btn btn-primary" (click)="deleteClick(book.bookingId)">X</button>
+                    </td>
+
 
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <div style="margin-bottom: 10px;">
+    <!-- <div style="margin-bottom: 10px;">
         <form>
                      
-            <div class="d-flex flex-row bd-highlight mb-3">
-                <img  class="img-thumbnail"
-                [src]="PhotoPath+PhotoFileName"/>
+            <div class="d-flex flex-row bd-highlight mb-3" >
+                <img   style="height: 50px; width: 150px;" 
+                [src]="PhotoPath+PhotoFileName" alt=" PhotoFileName"/>
                 <input class="m-2" type="file" (change)="imageUpload($event)">
             </div>
             
             <button type="submit" class="btn btn-primary">Submit</button>
          </form>
         </div>
+-->
+    <div class="form-group" style="margin: 50px;">
+
+        <div class="custom-file">
+
+            <input #file type="file" id="customFile" accept=".jpg,.png,.gif" (change)="imagePreview($event)" />
+            <button type="submit" class="btn btn-primary" (click)="upload(file.files)">submit</button>
+            <div *ngIf="filePath && filePath !== ''">
+                <img style="height: 150px; width: 150px;"   [src]="filePath" [alt]="myForm.value.name">
+
+
+            </div>
+        </div>
+        <div>
+
+            <!-- <label class="custom-file-label" for="customFile">Choose file</label>-->
+        </div>
+    </div>
+
+
+
+    <!--  <form [formGroup]="myForm" (ngSubmit)="submit()">
+
+            <div *ngIf="filePath && filePath !== ''">
+              <img style="height: 150px; width: 150px;" [src]="filePath" [alt]="myForm.value.name">
+            </div>
+          
+          <input type="file" accept="image/*" (change)="imagePreview($event)" />
+          
+            <input formControlName="filename" placeholder="File name">
+          
+            <button type="submit">Upload</button>
+          </form>-->
 </body>

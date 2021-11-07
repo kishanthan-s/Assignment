@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
       
       this.Invalidlogin=false;
       location.reload();
-      this.router.navigate(['/profile']);
+     // this.router.navigate(['/profile']);
       this.getId(form.value.email);
       
      // this.router.navigate(["/"]);

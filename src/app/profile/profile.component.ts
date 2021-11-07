@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { BookingDetailService } from '../shared/booking-detail.service';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,11 +15,18 @@ export class ProfileComponent implements OnInit {
   
   
 
-  constructor(private http: HttpClient, private router: Router ) { }
+  constructor(private http: HttpClient, private router: Router , public fb: FormBuilder) { 
+    this.myForm = this.fb.group({
+      img: [null],
+      filename: ['']
+    })
+  }
   Profile: any=[];
   PhotoFileName="anonymous.png";
   PhotoPath=environment.Photo_Url;
   books:any=[];
+  filePath: string;
+  myForm: FormGroup;
 
    
   
@@ -55,19 +62,19 @@ export class ProfileComponent implements OnInit {
       });
     }
   }
+//image upload
+ // imageUpload(event: any)
+ // {
+ //   var file=event.target.files[0];
+ ///   const formData: FormData=new FormData();
+ ///   formData.append('file', file,file.name);
 
-  imageUpload(event: any)
-  {
-    var file=event.target.files[0];
-    const formData: FormData=new FormData();
-    formData.append('file', file,file.name);
-
-    this.http.post(environment.Photo_Url, formData)
-    .subscribe((data:any)=>{
-      console.log(data);
+ //   this.http.post(environment.Photo_Url, formData)
+ //   .subscribe((data:any)=>{
+ //     console.log(data);
       
-  });
-  }
+  //});
+  //}
 
   
   onSubmit(event: any) {
@@ -75,7 +82,7 @@ export class ProfileComponent implements OnInit {
     this.http.post(environment.Photo_Url, FormData)
   }
   
-
+//image upload
   public getIdofcustomer(address:any)
   {
    
@@ -103,7 +110,51 @@ export class ProfileComponent implements OnInit {
   });
   }
 
-
+//image upload
+  imagePreview(e:any) {
+    const file = (e.target ).files[0];
  
+     this.myForm.patchValue({
+       img: File
+     });
+ 
+     this.myForm.get('img')!.updateValueAndValidity()
+ 
+     const reader = new FileReader();
+     reader.onload = () => {
+       this.filePath = reader.result as string;
+     }
+     reader.readAsDataURL(file)
+   }
+ 
+  
+
+   upload(files:any) {
+    if (files.length === 0)
+      return;
+  
+    const formData = new FormData();
+  
+    for (const file of files) {
+      formData.append(file.name, file);
+    }
+  
+  
+  
+    this.http.post("https://localhost:5001/api/Image/"+this.id2, formData).subscribe(event => {
+     
+      console.log("sucess");
+      console.log(formData);
+      location.reload()
+ 
+     
+    },
+    error => {
+      console.log(error);
+    });
+  }
+ 
+
+ //image upload
 
 }

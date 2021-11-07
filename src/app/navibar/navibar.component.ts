@@ -1,6 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-navibar',
@@ -9,12 +11,15 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class NavibarComponent implements OnInit {
 
-  constructor(private jwtHelper: JwtHelperService, private router: Router) { }
+  imageToShow: any;
+
+  constructor(private jwtHelper: JwtHelperService, private router: Router, private http: HttpClient,private sanitizer: DomSanitizer) { }
  
   Invalidlogins: boolean=false;
 
   ngOnInit() {
     this.isUserAuthenticated();
+    
   }
 
     
@@ -29,6 +34,7 @@ export class NavibarComponent implements OnInit {
       
       this.Invalidlogins=true;
       console.log(this.Invalidlogins);
+      this.getImage();
       return true;
     }
     else
@@ -47,5 +53,34 @@ export class NavibarComponent implements OnInit {
     location.reload();
   
   }
+
+  createImageFromBlob(image: Blob) {
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+       this.imageToShow = reader.result;
+    }, false);
+ 
+    if (image) {
+       reader.readAsDataURL(image);
+    }
+ }
+
+ 
+
+
+
+ getImage() {
+  
+  this.http.get("https://localhost:5001/api/Image/test/"+"32c14414-226a-4674-aa28-cd19bf839c6f", { responseType: 'blob' }).subscribe(data => {
+     this.createImageFromBlob(data);
+     console.log("sucess");
+     
+  }, error => {
+     
+     console.log(error);
+  });
+}
+
+  
 
 }
