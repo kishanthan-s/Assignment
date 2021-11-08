@@ -77,10 +77,10 @@ export class ProfileComponent implements OnInit {
   //}
 
   
-  onSubmit(event: any) {
+  //onSubmit(event: any) {
     
-    this.http.post(environment.Photo_Url, FormData)
-  }
+  //  this.http.post(environment.Photo_Url, FormData)
+  //}
   
 //image upload
   public getIdofcustomer(address:any)
