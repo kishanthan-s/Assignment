@@ -5,14 +5,14 @@ html {
 
 .bg {
   /* The image used */
-  background-image: url(../../assets/banner5.jpg);
+  background-image: url(../../assets/banner1.jpg);
   /* Full height */
   height: 100%;
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding-bottom: 43px;
+/*  padding-bottom: 80px;*/
   
 }
 

@@ -83,6 +83,8 @@ export class ProfileComponent implements OnInit {
   //}
   
 //image upload
+
+
   public getIdofcustomer(address:any)
   {
    

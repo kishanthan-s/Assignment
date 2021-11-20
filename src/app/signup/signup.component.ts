@@ -30,8 +30,15 @@ export class SignupComponent implements OnInit {
     .subscribe(
       (res)=>{
         console.log("Submitted sucessfully");
-        location.reload();
+      //  location.reload();
         this.toastr.success('Submitted sucessfully', 'signup detail register')
+        //added for submission
+        form.form.reset();
+        setTimeout(
+           () => {
+             this.router.navigate(['/home']);
+          } ,5000
+        );
         
       },
       (err)=>{

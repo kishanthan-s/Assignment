@@ -33,15 +33,22 @@ export class HomeComponent implements OnInit {
       localStorage.setItem("jwt",token);
       
       this.Invalidlogin=false;
-      location.reload();
-     // this.router.navigate(['/profile']);
+      //location.reload();
+      this.router.navigate(['/profile']);
       this.getId(form.value.email);
       
      // this.router.navigate(["/"]);
      
     }, err =>{
       this.Invalidlogin= true;
-      
+     // location.reload();
+      //location relord
+      setTimeout(
+        function () {
+          location.reload();
+        } ,1000
+      );
+      //------
     })
 
   }
